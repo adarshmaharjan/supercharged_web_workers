@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Worker Supercharged</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      #input {
+        width: 0;
+        height: 0;
+        overflow: hidden;
+      }
+      #input + label {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #333;
+        color: #fff;
+        cursor: pointer;
+      }
+      #input:focus + label {
+        outline: 5px solid #555;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>SuperCharged</h1>
+    <input type="file" accept="image/*" name="input" id="input" />
+    <label for="input">Choose File</label>
+    <br />
+    <canvas id="preview"></canvas>
+
+    <script type="text/javascript">
+      const $input = document.getElementById("input");
+      const fileReader = new FileReader();
+      const $preview = document.getElementById("preview");
+      const previewCtx = $preview.getContext("2d");
+
+      const image = new Image();
+
+      function applyFilter() {
+
+        
+
+      }
+
+      image.addEventListener("load", () => {
+        $preview.width = image.width;
+        $preview.height = image.height;
+        previewCtx.drawImage(image, 0, 0);
+      });
+
+      fileReader.addEventListener("load", (e) => {
+        const base64 = e.target.result;
+        image.src = base64;
+      });
+
+      $input.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        fileReader.readAsDataURL(file);
+      });
+    </script>
+  </body>
+</html>
